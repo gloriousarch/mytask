@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -67,4 +67,4 @@ def test_login(request):
     if request.user.is_authenticated:
         return HttpResponse('Congrats, you are logged in!')
     else:
-        return HttpResponse('Gotta login bruv')
+        return HttpResponseForbidden('Gotta login bruv')
