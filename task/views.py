@@ -48,9 +48,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('tasks:index'))
-            else:
-                return HttpResponse('Account is disabled :(')
+                return redirect(reverse('task:index'))
         else:
             return HttpResponse('Invalid username/password pair.')
     else:
