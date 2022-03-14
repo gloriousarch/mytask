@@ -13,6 +13,9 @@ class UserProfile(models.Model):
                                          "Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
-    tasks_posted = models.IntegerField
-    tasks_received = models.IntegerField
-    tasks_completed = models.IntegerField
+    tasks_posted = models.IntegerField(default=0)
+    tasks_received = models.IntegerField(default=0)
+    tasks_completed = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.user.username
