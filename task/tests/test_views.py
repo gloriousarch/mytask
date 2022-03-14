@@ -3,6 +3,24 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+class PageTest(TestCase):
+    def test_login_page(self):
+        response = self.client.get(reverse("task:login"))
+        self.assertEquals(200, response.status_code)
+
+    def test_index_page(self):
+        response = self.client.get(reverse("task:index"))
+        self.assertEquals(200, response.status_code)
+
+    def test_about_page(self):
+        response = self.client.get(reverse("task:about"))
+        self.assertEquals(200, response.status_code)
+
+    def test_register_page(self):
+        response = self.client.get(reverse("task:register"))
+        self.assertEquals(200, response.status_code)
+
+
 class LoginTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -12,10 +30,6 @@ class LoginTest(TestCase):
     def test_default_unauthorised(self):
         response = self.client.get(reverse("task:login-test"))
         self.assertEquals(403, response.status_code)
-
-    def test_login_page(self):
-        response = self.client.get(reverse("task:login"))
-        self.assertEquals(200, response.status_code)
 
     def test_login_success(self):
         response = self.client.post(reverse("task:login"), dict(username="testuser", password="testpass123*"))
