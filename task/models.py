@@ -19,3 +19,18 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Task(models.Model):
+    
+    task_id = models.AutoField(primary_key=True)
+    publisher = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="publish")
+    receiver = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="recieve")
+
+    task_title = models.CharField(max_length=30)
+    completion_state = models.BooleanField(default=0)
+    task_description = models.TextField()
+    task_reward = models.IntegerField(default=0)
+    release_time = models.DateTimeField(auto_now_add=True)
+
+def __str__(self):
+        return self.task_title
