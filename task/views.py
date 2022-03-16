@@ -2,17 +2,24 @@ from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequ
 from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import render
 from task.forms import UserForm
 from task.models import UserProfile
 
 
 def index(request):
-    return HttpResponse("This is home page ")
+    return render(request, 'task/index.html', )
 
+def admin(request):
+    return render(request, 'task/index.html', )
 
 def about(request):
-    return HttpResponse("This is about page ")
+    return render(request, 'task/about.html', )
+
+def register(request):
+    return render(request, 'task/register.html', )
+
+
 
 
 def user_register(request):
