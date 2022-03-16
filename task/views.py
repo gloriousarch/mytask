@@ -19,7 +19,29 @@ def about(request):
 def register(request):
     return render(request, 'task/register.html', )
 
+def login(request):
+    return render(request, 'task/Login.html', )
 
+def taskpage(request):
+    return render(request, 'task/taskpage.html', )
+
+def taskpageid(request):
+    return render(request, 'task/taskpageid.html', )
+
+def usercenter(request):
+    return render(request, 'task/Usercenter.html', )
+
+def posttask(request):
+    return render(request, 'task/posttask.html', )
+
+def accepttask(request):
+    return render(request, 'task/accepttask.html', )
+
+def modifytheinformation(request):
+    return render(request, 'task/Usercenter.html', )
+
+def changepassword(request):
+    return render(request, 'task/Usercenter.html', )
 
 
 def user_register(request):
