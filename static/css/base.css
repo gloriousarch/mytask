@@ -1,0 +1,154 @@
+ * {
+          margin: 0;
+          padding: 0;
+      }
+
+
+.nav {
+            height: 41px;
+            border-top: 3px solid orange;
+            border-bottom: 1px solid #edeef0;
+            background-color: #fcfcfc;
+            line-height: 41px;
+
+
+            }
+.nav a {
+display: inline-block;
+height: 41px;
+padding: 0 20px;
+font-size: 12px;
+color: #4c4c4c;
+text-decoration: none;
+}
+
+
+.nav p {
+            position: absolute;
+            right: 0;
+            display: inline-block;
+            height: 41px;
+            padding: 0 20px;
+            font-size: 12px;
+            color: #4c4c4c;
+            text-decoration: none;
+        }
+
+.nav a:hover {
+            background-color: #eee;
+            color: #ff8500;
+        }
+
+
+.nav c {
+            position: relative;
+
+            left: 50%;
+            margin-top: -60px;
+            margin-left: -60px;
+            display: inline-block;
+            height: 41px;
+            padding: 0 20px;
+            font-size: 12px;
+            color: #4c4c4c;
+            font-weight:bold
+        }
+
+.banner {
+
+           background-color: #F5F5F5;
+
+        }
+
+.nav2 {
+            height: 41px;
+            border-top: 1px solid #edeef0;
+            border-bottom: 1px solid #edeef0;
+            background-color: #fcfcfc;
+            line-height: 41px;
+            text-align: right;
+
+        }
+        .nav2 a {
+            display: inline-block;
+            height: 41px;
+            padding: 0px 20px;
+            font-size: 12px;
+            color: #4c4c4c;
+            text-decoration: none;
+        }
+        .nav2 a:hover {
+            background-color: #eee;
+            color: #ff8500;
+        }
+
+.sub_banner {
+            height: 640px;
+
+
+        }
+
+.w {
+            height: 228px;
+
+
+        }
+
+.LogoPictureBox {
+            float:left;
+            position:relative;
+            left:39%;
+            top:9%;
+
+            height: 200px;
+            text-align: center;
+        }
+
+.SubPictureBox {
+            float:left;
+            position:relative;
+            left:28%;
+
+
+            height: 300px;
+            text-align: center;
+
+        }
+
+//indexpage
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+
+.test {
+
+            float: left;
+            border-width: 1px;
+            border-style: solid;
+            border-color: black;
+            text-align: center;
+            width: 300px;
+            height: 145px;
+
+        }
+
+.UOFG {
+    float: left;
+    margin-left: 14px;
+    width: 200px;
+    height: 300px;
+
+}
+
