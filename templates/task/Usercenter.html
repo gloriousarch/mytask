@@ -1,0 +1,54 @@
+{% extends 'task/usercenterbase.html' %}
+{% load staticfiles %} <!-- New line -->
+
+
+
+{% block title_block %}
+        UserCenter
+{% endblock %}
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+{% endblock %}
+
+{% block nav_block %}
+        <c>User Center</c>
+
+{% endblock %}
+
+{% block banner_block %}
+        <div class="box clearfix">
+        <div class="nav_box">
+                 <div class="shell">
+                <a href="#" class="boxa"><span>List</span></a>
+                <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
+                <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
+                <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
+                <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change the password</span></a>
+                <a href="#" class="boxa"><span>Logout</span></a>
+                </div>
+
+        </div>
+        <div class="r_box">
+                <div class="test_box">
+                        <p>Welcome User !</p>
+                        <p>Post task: 0</p>
+                        <p>Accept task : 0</p>
+                        <p>Completed tasks : 0</p>
+                        </div>
+
+                <div class="user_photo_box">
+                        <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                         <a href="#"><button class="b2">Upload User's Photo </button></a>
+                        </div>
+        </div>
+
+            <div class="r_box"></div>
+        </div>
+
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:admin' %}">Admin</a>
+{% endblock %}

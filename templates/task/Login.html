@@ -1,0 +1,36 @@
+{% extends 'task/base.html' %}
+{% load staticfiles %} <!-- New line -->
+
+
+
+{% block title_block %}
+        Login
+{% endblock %}
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static "css/login.css" %}" />
+{% endblock %}
+
+{% block nav_block %}
+        <c>Login</c>
+        <a href="{% url 'task:index' %}">HomePage</a>
+{% endblock %}
+
+{% block banner_block %}
+        <div class="sub_banner">
+                <div class="loginBox">
+                        <div class="ImgBox"> <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" /> </div>
+                        <form action="#" class="form" >
+                                <input type="UserName" placeholder="UserName" class="input" />
+                                <input type="Password" placeholder="Password" class="input" />
+                                <a href="{% url 'task:register' %}" class="link">Not got an account?</a>
+                                <input type="submit" value="Login" button class="btn" >
+                        </form>
+                </div>
+        </div>
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:about' %}">About</a>
+{% endblock %}

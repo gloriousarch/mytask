@@ -1,0 +1,112 @@
+{% extends 'task/usercenterbase.html' %}
+{% load staticfiles %} <!-- New line -->
+
+
+
+{% block title_block %}
+        UserCenter/Accept task
+{% endblock %}
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+<link rel="stylesheet" href="{% static "css/SingleBoxStyle.css" %}" />
+<link rel="stylesheet" href="{% static "css/taskpagestyle.css" %}" />
+{% endblock %}
+
+{% block nav_block %}
+        <c>UserCenter</c>
+{% endblock %}
+
+{% block banner_block %}
+        <div class="box clearfix">
+        <div class="nav_box">
+                 <div class="shell">
+                <a href="#" class="boxa"><span>List</span></a>
+                <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
+                <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
+                <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
+                <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change the password</span></a>
+                <a href="#" class="boxa"><span>Logout</span></a>
+                </div>
+
+        </div>
+                <div class="accepttbox">
+
+                        <div class="trboxleft">
+
+                                UserName: User
+
+                                </div>
+
+                        <div class="trboxright">
+                                <a href="#"><button class="b2">Completed/not completed</button></a>
+
+                                </div>
+                </div>
+
+                <div class="saccepttbox">
+                        <div class="singlebox">
+                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                            <p class="review">Task description</p>
+
+                        <div class="info">
+                            <h4> <a href="#">Task Title</a></h4>
+                            <em>|</em>
+                            <span> Username</span>
+                            </div>
+
+                        <div class="appraise">Time</div>
+                        </div>
+
+
+                        <div class="singlebox">
+                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                            <p class="review">Task description</p>
+
+                        <div class="info">
+                            <h4> <a href="#">Task Title</a></h4>
+                            <em>|</em>
+                            <span> Username</span>
+                            </div>
+
+                        <div class="appraise">Time</div>
+                        </div>
+
+
+                        <div class="singlebox">
+                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                            <p class="review">Task description</p>
+
+                        <div class="info">
+                            <h4> <a href="#">Task Title</a></h4>
+                            <em>|</em>
+                            <span> Username</span>
+                            </div>
+
+                        <div class="appraise">Time</div>
+                        </div>
+
+                         <div class="nav4">
+                            <a href="#">Pervious Page</a>
+                            <a href="#">NextPage</a>
+                            <p>PageNumber :</p>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <input type="text" value="Input the pagenumber:">
+                        </div>
+                    </div>
+
+
+
+        </div>
+
+
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:usercenter' %}">User Center Home Page</a>
+{% endblock %}

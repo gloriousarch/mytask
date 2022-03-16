@@ -1,0 +1,41 @@
+{% extends 'task/base.html' %}
+{% load staticfiles %} <!-- New line -->
+
+
+
+{% block title_block %}
+        Mytask
+{% endblock %}
+
+{% block link_block %}
+
+{% endblock %}
+
+{% block nav_block %}
+        <c>Mytask</c>
+        <a href="{% url 'task:taskpage' %}">TaskPage</a>
+        <p><a href="{% url 'task:login' %}">Login</a></p>
+{% endblock %}
+
+{% block banner_block %}
+        <div class="sub_banner">
+                <div class="w">
+                        <div class = "LogoPictureBox">
+                                <img src="{% static 'images/Logo.jpg' %}" alt="Picture of Logo" />
+                        </div>
+                </div>
+                <div class="w">
+                        <div class = "SubPictureBox clearfix">
+                                <div class="test"> This is a task platform in school ,designed to help each other!  </div>
+                                <div class="UOFG">  <img src="{% static 'images/UOFG.jpg' %}" alt="Picture of UOFG" /> </div>
+
+                        </div>
+                </div>
+        </div>
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:usercenter' %}">User Center</a>
+        <a href="{% url 'task:about' %}">About</a>
+{% endblock %}

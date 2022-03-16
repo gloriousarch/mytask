@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %} <!-- New line -->
+
+
+<html lang="en">
+
+<head>
+    <title>
+        {% block title_block %}
+
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+
+    {% block link_block %}
+
+    {% endblock %}
+
+
+</head>
+
+<body>
+    <div class="nav">
+        <a href="{% url 'task:index' %}">HomePage</a>
+        {% block nav_block %}
+
+        {% endblock %}
+    </div>
+
+
+        <div class="w">
+            {% block banner_block %}
+
+            {% endblock %}
+        </div>
+
+
+    </div>
+
+
+    <div class="nav2">
+
+        {% block nav2_block %}
+
+        {% endblock %}
+    </div>
+
+
+</body>
+
+</html>

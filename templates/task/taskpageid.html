@@ -1,0 +1,58 @@
+{% extends 'task/usercenterbase.html' %}
+{% load staticfiles %} <!-- New line -->
+
+
+
+{% block title_block %}
+        Task Page
+{% endblock %}
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+<link rel="stylesheet" href="{% static "css/SingleBoxStyle.css" %}" />
+<link rel="stylesheet" href="{% static "css/taskpagestyle.css" %}" />
+{% endblock %}
+
+{% block nav_block %}
+        <c>Task Page</c>
+{% endblock %}
+
+{% block banner_block %}
+       <div class="box clearfix">
+        <div class="nav_box">
+            <div class="titleandpbox">
+            <p>Title:<p>
+            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                </div>
+        </div>
+                <div class="trbox">
+
+                        <div class="tasktrboxleft">
+                            <p>Task id:<p>
+                            <p>Task issuer:<p>
+                            <p>Phone number:<p>
+                            <p>Release time:<p>
+
+                                </div>
+
+                        <div class="tasktrboxright">
+
+                                <a href="#"><button class="b2">Accept the task</button></a>
+                                <a href="{% url 'task:taskpage' %}"><button class="b2">Back to the task page</button></a>
+                                </div>
+                </div>
+
+                <div class="strbox">
+                    <div class="testcbox"> This is a task platform in school ,designed to help each other!  </div>
+                </div>
+
+        </div>
+
+
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:usercenter' %}">User Center </a>
+        <a href="{% url 'task:about' %}">About</a>
+{% endblock %}

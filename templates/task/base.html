@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load staticfiles %} <!-- New line -->
+
+
+<html lang="en">
+
+<head>
+    <title>
+        {% block title_block %}
+
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    {% block link_block %}
+
+    {% endblock %}
+
+
+</head>
+
+<body>
+    <div class="nav">
+
+        {% block nav_block %}
+
+        {% endblock %}
+    </div>
+
+
+    <div class="banner ">
+        {% block banner_block %}
+
+        {% endblock %}
+    </div>
+
+
+    <div class="nav2">
+        {% block nav2_block %}
+
+        {% endblock %}
+    </div>
+
+
+</body>
+
+</html>
