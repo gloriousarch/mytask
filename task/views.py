@@ -10,35 +10,38 @@ from task.models import UserProfile
 def index(request):
     return render(request, 'task/index.html', )
 
+
 def admin(request):
     return render(request, 'task/index.html', )
+
 
 def about(request):
     return render(request, 'task/about.html', )
 
-def register(request):
-    return render(request, 'task/register.html', )
-
-def login(request):
-    return render(request, 'task/Login.html', )
 
 def taskpage(request):
     return render(request, 'task/taskpage.html', )
 
+
 def taskpageid(request):
     return render(request, 'task/taskpageid.html', )
+
 
 def usercenter(request):
     return render(request, 'task/Usercenter.html', )
 
+
 def posttask(request):
     return render(request, 'task/posttask.html', )
+
 
 def accepttask(request):
     return render(request, 'task/accepttask.html', )
 
+
 def modifytheinformation(request):
     return render(request, 'task/Usercenter.html', )
+
 
 def changepassword(request):
     return render(request, 'task/Usercenter.html', )
@@ -62,7 +65,7 @@ def user_register(request):
     else:
         user_form = UserForm()
 
-    return HttpResponse('Register Page ¯\\_(ツ)_/¯ ')
+    return render(request, 'task/register.html', )
 
 
 def user_login(request):
@@ -79,7 +82,7 @@ def user_login(request):
         else:
             return HttpResponse('Invalid username/password pair.')
     else:
-        return HttpResponse('Login Page 👍')
+        return render(request, 'task/Login.html')
 
 
 @login_required
