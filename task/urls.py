@@ -19,7 +19,7 @@ urlpatterns = [
     # User auth
     path('register/', views.user_register, name='register'),
     path('login/', views.user_login, name='login'),
-    path('logout/', views.logout, name='logout'),
+    path('logout/', views.user_logout, name='logout'),
 
     # For tests. Do not remove unless deployment.
     path('login-test/', views.test_login, name='login-test')

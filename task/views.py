@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -11,6 +13,7 @@ def index(request):
     return render(request, 'task/index.html', )
 
 
+@login_required
 def admin(request):
     return render(request, 'task/index.html', )
 
@@ -19,30 +22,37 @@ def about(request):
     return render(request, 'task/about.html', )
 
 
+@login_required
 def taskpage(request):
     return render(request, 'task/taskpage.html', )
 
 
+@login_required
 def taskpageid(request):
     return render(request, 'task/taskpageid.html', )
 
 
+@login_required
 def usercenter(request):
     return render(request, 'task/Usercenter.html', )
 
 
+@login_required
 def posttask(request):
     return render(request, 'task/posttask.html', )
 
 
+@login_required
 def accepttask(request):
     return render(request, 'task/accepttask.html', )
 
 
+@login_required
 def modifytheinformation(request):
     return render(request, 'task/Usercenter.html', )
 
 
+@login_required
 def changepassword(request):
     return render(request, 'task/Usercenter.html', )
 
@@ -80,6 +90,7 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('task:index'))
         else:
+            print(username, password)
             return HttpResponse('Invalid username/password pair.')
     else:
         return render(request, 'task/Login.html')

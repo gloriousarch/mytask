@@ -21,14 +21,16 @@
         <div class="sub_banner">
                 <div class="loginBox">
                         <div class="ImgBox"> <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" /> </div>
-                        <form action="#" class="form" >
-                                <input type="UserName" placeholder="UserName" class="input" />
+                        <form action="{% url 'task:register' %}" method="POST" class="form" >
+                                {% csrf_token %}
+
+                                <input type="text" name="username" placeholder="UserName" class="input" />
+                                <input type="Password" name="password" placeholder="Password" class="input" />
                                 <input type="Password" placeholder="Password" class="input" />
-                                <input type="Password" placeholder="Password" class="input" />
-                                <input type="FirstName" placeholder="First Name" class="input" />
-                                <input type="FamilyName" placeholder="FamilyName" class="input" />
-                                <input type="Email" placeholder="Email" class="input" />
-                                <input type="submit" value="Register" button class="btn" >
+                                <input type="text" name="first_name" placeholder="First Name" class="input" />
+                                <input type="text" name="last_name" placeholder="FamilyName" class="input" />
+                                <input type="email" name="email" placeholder="Email" class="input" />
+                                <input type="submit" value="Register" class="btn" >
                         </form>
                 </div>
         </div>
