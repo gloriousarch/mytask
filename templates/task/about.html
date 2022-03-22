@@ -1,58 +1,48 @@
-{% extends 'task/usercenterbase.html' %}
+{% extends 'task/base.html' %}
 {% load staticfiles %} <!-- New line -->
 
 
 
 {% block title_block %}
-        Task Page
+        About Page
 {% endblock %}
 
 {% block link_block %}
-<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
-<link rel="stylesheet" href="{% static "css/SingleBoxStyle.css" %}" />
-<link rel="stylesheet" href="{% static "css/taskpagestyle.css" %}" />
+
 {% endblock %}
 
 {% block nav_block %}
-        <c>Task Page</c>
+        <c>About</c>
+        <a href="{% url 'task:taskpage' %}">TaskPage</a>
+        <p><a href="{% url 'task:login' %}">Login</a></p>
 {% endblock %}
 
 {% block banner_block %}
-       <div class="box clearfix">
-        <div class="nav_box">
-            <div class="titleandpbox">
-            <p>Title:<p>
-            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+        <div class="sub_banner">
+                <div class="w">
+                        <div class = "LogoPictureBox">
+                                <img src="{% static 'images/Logo.jpg' %}" alt="Picture of Logo" />
+                        </div>
+                </div>
+                <div class="w">
+                        <div class = "SubPictureBox clearfix">
+                                <div class="testb">
+                                    <p>Create by: </p>
+                                    <p>Max Wang </p>
+                                    <p>Selim Bakirci </p>
+                                    <p>Max Cattanach </p>
+                                    <p>Yi Zhou </p>
+                                    <p>Ridhaa Manan </p>
+                                </div>
+                                <div class="UOFG">  <img src="{% static 'images/UOFG.jpg' %}" alt="Picture of UOFG" /> </div>
+
+                        </div>
                 </div>
         </div>
-                <div class="trbox">
-
-                        <div class="tasktrboxleft">
-                            <p>Task id:<p>
-                            <p>Task issuer:<p>
-                            <p>Phone number:<p>
-                            <p>Release time:<p>
-
-                                </div>
-
-                        <div class="tasktrboxright">
-
-                                <a href="#"><button class="b2">Accept the task</button></a>
-                                <a href="#"><button class="b2">Back to the task page</button></a>
-                                </div>
-                </div>
-
-                <div class="strbox">
-                    <div class="testcbox"> This is a task platform in school ,designed to help each other!  </div>
-                </div>
-
-        </div>
-
-
 
 {% endblock %}
 
 {% block nav2_block %}
-        <a href="task/about.html">User Center</a>
-        <a href="task/about.html">About</a>
+        <a href="{% url 'task:usercenter' %}">User Center</a>
+        <a href="{% url 'task:about' %}">About</a>
 {% endblock %}
