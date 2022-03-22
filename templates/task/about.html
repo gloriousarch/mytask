@@ -13,8 +13,7 @@
 
 {% block nav_block %}
         <c>About</c>
-        <a href="{% url 'task:taskpage' %}">TaskPage</a>
-        <p><a href="{% url 'task:login' %}">Login</a></p>
+        <a href="{% url 'task:index' %}">Homepage</a>
 {% endblock %}
 
 {% block banner_block %}
@@ -43,6 +42,5 @@
 {% endblock %}
 
 {% block nav2_block %}
-        <a href="{% url 'task:usercenter' %}">User Center</a>
-        <a href="{% url 'task:about' %}">About</a>
+
 {% endblock %}
