@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from task.models import UserProfile
+from task.models import UserProfile, Task
 
 
 class UserTest(TestCase):
@@ -47,3 +47,28 @@ class UserTest(TestCase):
     def test_user_relation(self):
         profile = UserProfile(user=self.user)
         self.assertEquals("testuser", profile.user.username)
+
+
+class TaskTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user = User.objects.create_user(username="testuser", password="testpass123*")
+        UserProfile.objects.create(user=user)
+
+    def setUp(self):
+        self.user = UserProfile.objects.first()
+
+    def test_blank_fields(self):
+        task = Task()
+        self.assertRaises(ValidationError, task.full_clean)
+
+    def test_publisher_only(self):
+        task = Task(publisher=self.user)
+        self.assertRaises(ValidationError, task.full_clean)
+
+    def test_correct(self):
+        task = Task(publisher=self.user, task_title="Title", task_description="Description")
+        try:
+            task.full_clean()
+        except ValidationError:
+            self.fail("Incorrect validation error with valid input.")
