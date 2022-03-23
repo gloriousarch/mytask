@@ -20,8 +20,8 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Task(models.Model):
-    
     task_id = models.AutoField(primary_key=True)
     publisher = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="publish")
     receiver = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="recieve")
@@ -32,5 +32,5 @@ class Task(models.Model):
     task_reward = models.IntegerField(default=0)
     release_time = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
+    def __str__(self):
         return self.task_title
