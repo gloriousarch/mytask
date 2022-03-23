@@ -13,11 +13,6 @@ def index(request):
     return render(request, 'task/index.html', )
 
 
-@login_required
-def admin(request):
-    return render(request, 'task/index.html', )
-
-
 def about(request):
     return render(request, 'task/about.html', )
 

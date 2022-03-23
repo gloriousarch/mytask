@@ -7,7 +7,6 @@ app_name = 'task'
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
-    path('admin/', views.admin, name='admin'),
     path('taskpage/', views.taskpage, name='taskpage'),
     path('taskpage/taskpageid/', views.taskpageid, name='taskpageid'),
     path('usercenter/', views.usercenter, name='usercenter'),
