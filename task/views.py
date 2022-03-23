@@ -1,11 +1,11 @@
 import sys
 
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from task.forms import UserForm
+from task.forms import UserForm, UserProfileForm, UserModifyForm
 from task.models import UserProfile
 
 
@@ -49,7 +49,32 @@ def accepttask(request):
 
 @login_required
 def modifytheinformation(request):
-    return render(request, 'task/Usercenter.html', )
+    profile = UserProfile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserModifyForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+
+        if profile_form.is_valid() and user_form.is_valid():
+            # Get user fields
+            user_form.save()
+
+            # Get profile fields
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['pictures']
+
+            profile.save()
+        else:
+            print(profile_form.errors, user_form.errors)
+    else:
+        user_form = UserModifyForm(instance=request.user)
+        profile_form = UserProfileForm(instance=profile)
+
+    data = dict(
+        profile_form=profile_form,
+        user_form=user_form
+    )
+    return render(request, 'task/Usercenter.html', context=data)
 
 
 @login_required
@@ -62,7 +87,7 @@ def changepassword(request):
             request.user.save()
         except Exception as e:
             _, _, tb = sys.exc_info()
-            return HttpResponse('Server Error: ' + tb)
+            return HttpResponseServerError('Server Error: ' + tb)
     return render(request, 'task/Usercenter.html', )
 
 
