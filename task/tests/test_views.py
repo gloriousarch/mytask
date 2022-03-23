@@ -34,6 +34,10 @@ class LoginTest(TestCase):
         response = self.client.get(reverse("task:login-test"))
         self.assertEquals(403, response.status_code)
 
+    def test_unauthenticated_redirect(self):
+        response = self.client.get(reverse("task:usercenter"))
+        self.assertEquals(302, response.status_code)
+
     def test_login_success(self):
         response = self.client.post(reverse("task:login"), dict(username="testuser", password="testpass123*"))
         self.assertEquals(302, response.status_code)
