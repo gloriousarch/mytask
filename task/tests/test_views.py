@@ -101,3 +101,20 @@ class RegisterTest(TestCase):
             UserProfile.objects.get(user__username="testuser1")
         except ObjectDoesNotExist:
             self.fail("New user profile does not exist.")
+
+
+class UserTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create_user(username="testuser", password="testpass123*")
+
+    def authenticate(self):
+        self.client.post(reverse("task:login"), dict(username="testuser", password="testpass123*"))
+
+    def test_change_password(self):
+        self.authenticate()
+        # Change password, logout, and login with new credentials
+        self.client.post(reverse("task:changepassword"), dict(password="newpass"))
+        self.client.get(reverse("task:logout"))
+        response = self.client.post(reverse("task:login"), dict(username="testuser", password="newpass"))
+        self.assertEquals(302, response.status_code)

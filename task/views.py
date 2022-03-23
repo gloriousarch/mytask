@@ -1,4 +1,4 @@
-import os
+import sys
 
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 from django.shortcuts import reverse, redirect
@@ -54,6 +54,15 @@ def modifytheinformation(request):
 
 @login_required
 def changepassword(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+
+        try:
+            request.user.set_password(password)
+            request.user.save()
+        except Exception as e:
+            _, _, tb = sys.exc_info()
+            return HttpResponse('Server Error: ' + tb)
     return render(request, 'task/Usercenter.html', )
 
 
