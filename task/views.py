@@ -49,7 +49,11 @@ def accepttask(request):
 
 @login_required
 def modifytheinformation(request):
-    profile = UserProfile.objects.get(user=request.user)
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        # Correct the database to make sure user has an associated profile
+        profile = UserProfile(user=request.user)
 
     if request.method == 'POST':
         user_form = UserModifyForm(request.POST, instance=request.user)

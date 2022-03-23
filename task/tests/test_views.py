@@ -118,3 +118,9 @@ class UserTest(TestCase):
         self.client.get(reverse("task:logout"))
         response = self.client.post(reverse("task:login"), dict(username="testuser", password="newpass"))
         self.assertEquals(302, response.status_code)
+
+    def test_modify_info(self):
+        self.authenticate()
+        self.client.post(reverse("task:modifytheinformation"), dict(first_name="chris", last_name="bacon"))
+        self.assertEquals("chris", User.objects.get(username="testuser").first_name)
+        self.assertEquals("bacon", User.objects.get(username="testuser").last_name)
