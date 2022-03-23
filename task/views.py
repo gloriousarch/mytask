@@ -5,7 +5,7 @@ from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from task.forms import UserForm, UserProfileForm, UserModifyForm
+from task.forms import UserForm, UserProfileForm, UserModifyForm, TaskForm
 from task.models import UserProfile, Task
 
 
@@ -39,7 +39,22 @@ def usercenter(request):
 
 @login_required
 def posttask(request):
-    return render(request, 'task/posttask.html', )
+    posted = False
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.publisher = UserProfile.objects.get(user=request.user)
+            task.save()
+
+            posted = True
+        else:
+            print(form.errors)
+    else:
+        form = TaskForm()
+
+    return render(request, 'task/posttask.html', context=dict(form=form, posted=posted))
 
 
 @login_required

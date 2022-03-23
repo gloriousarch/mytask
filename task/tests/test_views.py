@@ -168,3 +168,11 @@ class TaskTest(TestCase):
         self.authenticate()
         response = self.client.post(reverse('task:accepttask'), dict(task_id=5))
         self.assertEquals(400, response.status_code)
+
+    def test_post_task(self):
+        self.authenticate()
+        self.client.post(reverse('task:posttask'), dict(task_title='mytask1', task_description='desc'))
+        try:
+            task = Task.objects.get(task_title='mytask1')
+        except Task.DoesNotExist:
+            self.fail("Task wasn't created as expected.")
