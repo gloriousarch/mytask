@@ -41,6 +41,30 @@
                         <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                          <a href="#"><button class="b2">Upload User's Photo </button></a>
                         </div>
+
+                {% if user_form or profile_form %}
+                <div class="user_modify_box">
+                    <form id="user_modify_form" method="post" action="{% url 'task:modifytheinformation' %}">
+                        {% csrf_token %}
+
+                        {% for field in user_form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                            <br/>
+                        {% endfor %}
+
+                        {% for field in profile_form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                            <br/>
+                        {% endfor %}
+
+                        <input type="submit" name="submit" value="Update Information" />
+                    </form>
+                </div>
+                {% endif %}
         </div>
 
             <div class="r_box"></div>
