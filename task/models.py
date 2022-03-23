@@ -24,7 +24,7 @@ class UserProfile(models.Model):
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
     publisher = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="publish")
-    receiver = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="recieve")
+    receiver = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING, related_name="recieve", null=True)
 
     task_title = models.CharField(max_length=30)
     completion_state = models.BooleanField(default=0)
