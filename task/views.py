@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from task.forms import UserForm, UserProfileForm, UserModifyForm
-from task.models import UserProfile
+from task.models import UserProfile, Task
 
 
 def index(request):
@@ -44,7 +44,35 @@ def posttask(request):
 
 @login_required
 def accepttask(request):
-    return render(request, 'task/accepttask.html', )
+    task_accepted = False
+
+    if request.method == 'POST':
+        # A task ID is expected with the request.
+        if 'task_id' not in request.POST:
+            return HttpResponseBadRequest('\"task_id\" is a required field.')
+
+        # Make sure the requested task exists
+        try:
+            task = Task.objects.get(task_id=request.POST['task_id'])
+        except Task.DoesNotExist:
+            return HttpResponseBadRequest('Task does not exist.')
+
+        # Check and make sure task wasn't accepted by anyone else
+        if task.receiver is not None:
+            return HttpResponseBadRequest('Task was accepted by someone else.')
+
+        # Get the profile associated with user
+        try:
+            profile = UserProfile.objects.get(user=request.user)
+        except UserProfile.DoesNotExist:
+            profile = UserProfile.objects.create(user=request.user)
+
+        # Assign the task
+        task.receiver = profile
+        task.save()
+        task_accepted = True
+
+    return render(request, 'task/accepttask.html', context=dict(task_accepted=task_accepted))
 
 
 @login_required

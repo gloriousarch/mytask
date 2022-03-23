@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
-from task.models import UserProfile
+from task.models import UserProfile, Task
 
 
 class PageTest(TestCase):
@@ -124,3 +124,43 @@ class UserTest(TestCase):
         self.client.post(reverse("task:modifytheinformation"), dict(first_name="chris", last_name="bacon"))
         self.assertEquals("chris", User.objects.get(username="testuser").first_name)
         self.assertEquals("bacon", User.objects.get(username="testuser").last_name)
+
+
+class TaskTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        publisher_user = User.objects.create_user(username="publisher", password="publish123")
+        receiver_user = User.objects.create_user(username="receiver", password="receive123")
+        other_user = User.objects.create_user(username="testuser", password="testuser123")
+        publisher = UserProfile.objects.create(user=publisher_user)
+        receiver = UserProfile.objects.create(user=receiver_user)
+        UserProfile.objects.create(user=other_user)
+        Task.objects.create(publisher=publisher, receiver=receiver, task_title="task1")
+        Task.objects.create(publisher=publisher, task_title="task2")
+
+    def authenticate(self):
+        self.client.post(reverse("task:login"), dict(username="testuser", password="testuser123"))
+
+    def test_default_receiver(self):
+        task = Task.objects.get(task_title="task2")
+        self.assertEquals(None, task.receiver)
+
+    def test_accept_task(self):
+        self.authenticate()
+        self.client.post(reverse('task:accepttask'), dict(task_id=2))
+        user = UserProfile.objects.get(user__username="testuser")
+        task = Task.objects.get(task_title="task2")
+        self.assertEquals(user, task.receiver)
+
+    def test_already_accepted(self):
+        self.authenticate()
+        response = self.client.post(reverse('task:accepttask'), dict(task_id=1))
+        self.assertEquals(400, response.status_code)
+        user = UserProfile.objects.get(user__username="receiver")
+        task = Task.objects.get(task_title="task1")
+        self.assertEquals(user, task.receiver)
+
+    def test_invalid_id(self):
+        self.authenticate()
+        response = self.client.post(reverse('task:accepttask'), dict(task_id=5))
+        self.assertEquals(400, response.status_code)
