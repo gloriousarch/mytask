@@ -245,3 +245,36 @@ def test_login(request):
         return HttpResponse('Congrats, you are logged in!')
     else:
         return HttpResponseForbidden('Gotta login bruv')
+
+
+##########################################################--db pages--##########################################################
+
+def show_task(request, task_title_slug):
+    context_dict = {}
+
+    try:
+        task = Task.objects.get(slug=task_title_slug)
+        publisher = task.publisher
+        userprofile = UserProfile.objects.get(user=publisher.user)
+        context_dict['task'] = task
+        context_dict['userprofile'] = userprofile
+
+
+    except Task.DoesNotExist:
+        context_dict['task'] = None
+        context_dict['userprofile'] = None
+        print("no")
+
+    return render(request, 'task/taskpageid.html', context=context_dict)
+
+
+def search_task(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        tasks = Task.objects.filter(task_title__contains=searched).filter(completion_state=False, receiver=None)
+        return render(request, 'task/search_task.html', {'searched': searched, 'tasks': tasks})
+    else:
+        return render(request, 'task/search_task.html', )
+
+##########################################################--ajax--##########################################################
+
