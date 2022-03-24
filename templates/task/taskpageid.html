@@ -55,10 +55,18 @@
                                         {% csrf_token %}
                                         <button type="submit" class="b2" id="b2">Uncomplete the task</button>
                                 </form>
+                                <form method="POST" action="{% url 'task:accept-task' pk=task.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="b2" id="b2">Unaccept the task</button>
+                                </form>
                                         {% elif task.completion_state == False %}
                                 <form method="POST" action="{% url 'task:complete-task' pk=task.pk %}">
                                         {% csrf_token %}
                                         <button type="submit" class="b2" id="b2">Complete the task</button>
+                                </form>
+                                <form method="POST" action="{% url 'task:accept-task' pk=task.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="b2" id="b2">Unaccept the task</button>
                                 </form>
                                         {% endif %}
                                 {% elif task.receiver == None %}
