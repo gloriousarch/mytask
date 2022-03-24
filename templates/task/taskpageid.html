@@ -62,10 +62,13 @@
                                 </form>
                                         {% endif %}
                                 {% elif task.receiver == None %}
-                                <a href="#"><button  class="b2">Accept the task</button></a>
+                                <form method="POST" action="{% url 'task:accept-task' pk=task.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="b2" id="b2">Accept the task</button>
+                                </form>
                                 {% endif %}
                                 
-                                </form>
+                                
                                 {% endif %}
                                 <a href="{% url 'task:taskpage' %}"><button class="b2">Back to the task page</button></a>
                                 </div>

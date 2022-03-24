@@ -24,6 +24,26 @@ class CompleteTaskView(View):
         slug = obj.slug
         return redirect('/taskpage/'+slug)
 
+class AcceptTaskView(View):
+
+    def post(self, request, *args, **kwargs):
+        obj = get_object_or_404(Task, pk=self.kwargs['pk'])
+
+        try:
+            userprofile = UserProfile.objects.get(user=request.user)
+        except UserProfile.DoesNotExist:
+            # Correct the database to make sure user has an associated profile
+            userprofile = UserProfile(user=request.user)
+
+
+        if obj.receiver == None:
+            obj.receiver = userprofile
+        else:
+            obj.receiver = None
+        obj.save()
+        slug = obj.slug
+        return redirect('/taskpage/'+slug)
+
 def index(request):
     return render(request, 'task/index.html', )
 

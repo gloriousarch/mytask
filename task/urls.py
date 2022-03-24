@@ -19,7 +19,10 @@ urlpatterns = [
     path('usercenter/changepassword/', views.changepassword, name='changepassword'),
     path('search_task/', views.search_task, name ='search_task'),
 
+
+    #buttons
     path('task/<int:pk>/complete', views.CompleteTaskView.as_view(), name='complete-task'),
+    path('task/<int:pk>/accepted', views.AcceptTaskView.as_view(), name='accept-task'),
 
 
     # User auth
