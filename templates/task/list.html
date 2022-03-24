@@ -4,7 +4,7 @@
 
 
 {% block title_block %}
-        UserCenter/Accept task
+        UserCenter/Post task/list
 {% endblock %}
 
 {% block link_block %}
@@ -14,19 +14,19 @@
 {% endblock %}
 
 {% block nav_block %}
-        <c>UserCenter</c>
+        <c>UserCenter/Post task/list</c>
 {% endblock %}
 
 {% block banner_block %}
         <div class="box clearfix">
         <div class="nav_box">
                  <div class="shell">
-                <a href="{% url 'task:list' %}" class="boxa"><span>List</span></a>
+                <a href="#" class="boxa"><span>List</span></a>
                 <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
                 <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
                 <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
                 <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change the password</span></a>
-                <a href="#" class="boxa"><span>Logout</span></a>
+                <a href="{% url 'task:logout' %}" class="boxa"><span>Logout</span></a>
                 </div>
 
         </div>
@@ -47,11 +47,6 @@
                 <div class="saccepttbox">
                         {% for task in Tasks %}
                         <div class="singlebox">
-                            {% if task.completion_state %}
-                                <p>Completed</p>
-                            {% else %}
-                                <p>Uncomplete</p>
-                            {% endif %}
                             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                             <p class="review">{{task.task_description}}</p>
 
