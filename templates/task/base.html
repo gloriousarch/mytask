@@ -24,6 +24,12 @@
         {% block nav_block %}
 
         {% endblock %}
+        {% if user.is_authenticated %}
+                <p>Hey there {{ user.username}}!<a href="{% url 'task:logout' %}">Logout</a></p>
+
+        {% else %}
+                <p><a href="{% url 'task:login' %}">Login</a></p>
+        {% endif %}
     </div>
 
 

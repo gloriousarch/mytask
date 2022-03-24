@@ -1,0 +1,41 @@
+{% extends 'task/usercenterbase.html' %}
+{% load staticfiles %} <!-- New line -->
+
+{% block title_block %}
+        Search Page
+{% endblock %}
+
+{% block link_block %}
+<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+<link rel="stylesheet" href="{% static "css/SingleBoxStyle.css" %}" />
+<link rel="stylesheet" href="{% static "css/taskpagestyle.css" %}" />
+{% endblock %}
+
+{% block nav_block %}
+        <c>Search Page</c>
+{% endblock %}
+
+{% block banner_block %}
+    <center>
+        {% if searched %}
+            <h1>You Searched For: <br> {{ searched }}</h1>
+            <br>
+            {% for task in tasks %}
+            <a href="/taskpage/{{ task.slug }}">{{task}}<a/><br/>
+            {% endfor %}
+
+        {% else %}
+            <h1>You forgot to search for a task!</h1>
+        {% endif %}
+        <br></br>
+        <a href="{% url 'task:taskpage' %}"><button class="b1">Back to the task page</button></a>
+        
+
+    </center>
+
+{% endblock %}
+
+{% block nav2_block %}
+        <a href="{% url 'task:usercenter' %}">User Center </a>
+        <a href="{% url 'task:about' %}">About</a>
+{% endblock %}
