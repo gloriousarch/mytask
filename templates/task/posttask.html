@@ -19,7 +19,7 @@
         <div class="box clearfix">
         <div class="nav_box">
                  <div class="shell">
-                <a href="{% url 'task:list' %}" class="boxa"><span>List</span></a>
+                <a href="#" class="boxa"><span>List</span></a>
                 <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
                 <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
                 <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
@@ -33,11 +33,11 @@
                         <div class="trboxleft">
 
                                 <form>
-                            <label for="taskname">Task Title</label>
-                            <input type="text"  name="taskname" placeholder="">
+                            <label for="task_title">Task Title</label>
+                            <input type="text"  name="task_title" placeholder="">
 
-                            <label for="Release_time"> Release time</label>
-                            <input type="text"  name="Release_time" placeholder="dd/mm/yy">
+                            <label for="release_time"> Release time</label>
+                            <input type="text"  name="release_time" placeholder="dd/mm/yy">
 
                         <label for="state"> State</label>
                         <select  name="state">
@@ -58,8 +58,8 @@
 
                 <div class="strbox">
                      <form>
-                            <label for="taskcontent">Task content:</label>
-                            <input type="taskcontent"  name="taskcontent" placeholder="">
+                            <label for="task_description">Task content:</label>
+                            <input type="taskcontent"  name="task_description" placeholder="">
                          </form>
                 </div>
 
