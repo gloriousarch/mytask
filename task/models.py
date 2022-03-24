@@ -35,7 +35,7 @@ class Task(models.Model):
     task_description = models.TextField(blank=False)
     task_reward = models.IntegerField(default=0, blank=True)
     release_time = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.task_title)

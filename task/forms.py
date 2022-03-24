@@ -25,6 +25,8 @@ class UserProfileForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+
     class Meta:
         model = Task
         fields = ('task_title', 'task_description', 'task_reward')
