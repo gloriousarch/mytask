@@ -178,7 +178,7 @@ def modifytheinformation(request):
         profile_form=profile_form,
         user_form=user_form
     )
-    return render(request, 'task/Usercenter.html', context=data)
+    return render(request, 'task/Modifyinformation.html', context=data)
 
 
 @login_required
@@ -192,7 +192,7 @@ def changepassword(request):
         except Exception as e:
             _, _, tb = sys.exc_info()
             return HttpResponseServerError('Server Error: ' + tb)
-    return render(request, 'task/Usercenter.html', )
+    return render(request, 'task/ChangePassword.html', )
 
 
 def user_register(request):
