@@ -25,13 +25,28 @@
                                 {% csrf_token %}
 
                                 <input type="text" name="username" placeholder="UserName" class="input" />
-                                <input type="Password" name="password" placeholder="Password" class="input" />
-                                <input type="Password" placeholder="Password" class="input" />
+                                <input type="Password" class="inputpass" name="password" placeholder="Password" />
+                                <input type="Password" class="inputconf" name="confirmpassword" placeholder="Confirm Password" />
                                 <input type="text" name="first_name" placeholder="First Name" class="input" />
                                 <input type="text" name="last_name" placeholder="FamilyName" class="input" />
                                 <input type="email" name="email" placeholder="Email" class="input" />
                                 <input type="submit" value="Register" class="btn" >
                         </form>
+                        <script type="text/javascript">
+                                document.querySelector('.btn').onclick = function(){
+                                        
+                                        var password = document.querySelector('.inputpass').value,
+                                        confirmPassword = document.querySelector('.inputconf').value;
+                
+                                        if(password == ""){
+                                                alert("Field cannot be empty.");
+                                        }
+                                        else if(password != confirmPassword){
+                                                alert("passwords do not match.");
+                                                return false
+                                        }
+                                } 
+                        </script>
                 </div>
         </div>
 

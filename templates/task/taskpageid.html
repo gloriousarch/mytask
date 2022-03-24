@@ -17,27 +17,56 @@
         <c>Task Page</c>
 {% endblock %}
 
+
+
 {% block banner_block %}
+
+
        <div class="box clearfix">
         <div class="nav_box">
+        
+        {%if task %}
             <div class="titleandpbox">
-            <p>Title:<p>
+            <p>Task Title: {{ task.task_title }}<p>  
             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                 </div>
         </div>
                 <div class="trbox">
 
                         <div class="tasktrboxleft">
-                            <p>Task id:<p>
-                            <p>Task issuer:<p>
-                            <p>Phone number:<p>
-                            <p>Release time:<p>
+                            <p>Task id: {{ task.task_id }}<p>
+                            <p>Task issuer: {{ task.publisher }}<p>
+                            <p>Phone number: {{ userprofile.phone_number }}<p>
+                            <p>Release time: {{ task.release_time }}<p>
+                                    {% if task.completion_state %}
+                                    <p>Completion status: Complete</p>
+                                    {% else %}
+                                    <p>Completion status: Uncomplete</p>
+                                    {% endif %}
 
                                 </div>
 
                         <div class="tasktrboxright">
 
-                                <a href="#"><button class="b2">Accept the task</button></a>
+                                
+                                {% if task.receiver.user == request.user %}
+                                        {% if task.completion_state %}
+                                <form method="POST" action="{% url 'task:complete-task' pk=task.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="b2" id="b2">Uncomplete the task</button>
+                                </form>
+                                        {% elif task.completion_state == False %}
+                                <form method="POST" action="{% url 'task:complete-task' pk=task.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="b2" id="b2">Complete the task</button>
+                                </form>
+                                        {% endif %}
+                                {% elif task.receiver == None %}
+                                <a href="#"><button  class="b2">Accept the task</button></a>
+                                {% endif %}
+                                
+                                </form>
+                                {% endif %}
                                 <a href="{% url 'task:taskpage' %}"><button class="b2">Back to the task page</button></a>
                                 </div>
                 </div>
@@ -47,6 +76,7 @@
                 </div>
 
         </div>
+
 
 
 

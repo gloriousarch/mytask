@@ -24,7 +24,12 @@ def populate():
         ["homework", 20, "compute these problems"], 
         ["maths", 10, "solve these sums"], 
         ["tutoring", 5, "help these students"], 
-        ["cleaning", 35, "clean the tables"]
+        ["cleaning", 35, "clean the tables"],
+        ["sports", 26, "time to do sport!"],
+        ["art", 12, "i need help with my painting"],
+        ["lost shoes", 15, "can someone help me find my lost shoes?"],
+        ["washing", 4, "please wash my clothes for me"],
+        ["group project", 7, "i need another person for my group project"]
         ]
 
 
@@ -64,6 +69,12 @@ def populate():
             user.save()
             users[users.index(user) + 1].tasks_received = users[users.index(user) + 1].tasks_received + 1
             users[users.index(user) + 1].save()
+
+        new_task = Task.objects.create(publisher = user, task_title = tasklist[users.index(user) + 5][0], task_reward = tasklist[users.index(user) + 5][1], task_description = tasklist[users.index(user) + 5][2])
+        user.tasks_posted = user.tasks_posted + 1
+        user.save()
+        
+
 
         new_task.save()
             

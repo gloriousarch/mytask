@@ -20,7 +20,7 @@
         <div class="box clearfix">
         <div class="nav_box">
                  <div class="shell">
-                <a href="#" class="boxa"><span>List</span></a>
+                <a href="{% url 'task:list' %}" class="boxa"><span>List</span></a>
                 <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
                 <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
                 <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
@@ -31,24 +31,45 @@
         </div>
         <div class="r_box">
                 <div class="test_box">
-                        <p>Welcome User !</p>
-                        <p>Post task: 0</p>
-                        <p>Accept task : 0</p>
-                        <p>Completed tasks : 0</p>
+                        <p>Welcome {{user}} !</p>
+                        <p>Tasks Posted: {{userprofile.tasks_posted}}</p>
+                        <p>Accept task : {{userprofile.tasks_received}}</p>
+                        <p>Completed tasks : {{userprofile.tasks_completed}}</p>
                         </div>
 
                 <div class="user_photo_box">
                         <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                          <a href="#"><button class="b2">Upload User's Photo </button></a>
                         </div>
+
+                        {% if user_form or profile_form %}
+                        <div class="user_modify_box">
+                            <form id="user_modify_form" method="post" action="{% url 'task:modifytheinformation' %}">
+                                {% csrf_token %}
+        
+                                {% for field in user_form.visible_fields %}
+                                    {{ field.errors }}
+                                    {{ field.help_text }}
+                                    {{ field }}
+                                    <br/>
+                                {% endfor %}
+        
+                                {% for field in profile_form.visible_fields %}
+                                    {{ field.errors }}
+                                    {{ field.help_text }}
+                                    {{ field }}
+                                    <br/>
+                                {% endfor %}
+        
+                                <input type="submit" name="submit" value="Update Information" />
+                            </form>
+                        </div>
+                        {% endif %}
         </div>
 
             <div class="r_box"></div>
         </div>
 
 
-{% endblock %}
 
-{% block nav2_block %}
-        <a href="{% url 'task:admin' %}">Admin</a>
 {% endblock %}

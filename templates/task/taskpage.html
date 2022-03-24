@@ -25,68 +25,62 @@
                 <div class="accepttbox">
 
                         <div class="taskpageboxleft">
-
-                                Searchtask:
-                                 <input type="text" value="Task:">
-
+                                <form method=POST action="{% url 'task:search_task' %}">
+                                {% csrf_token %}
+                                Search tasks:
+                                 <input type="text" placeholder="Task" name="searched">
+                                </form>
                                 </div>
                 </div>
 
+                
+                
                 <div class="saccepttbox">
+                        {% for task in Tasks %}
                         <div class="singlebox">
                             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
-                            <p class="review">Task description</p>
+                            <p class="review">{{task.task_description}}</p>
 
                         <div class="info">
-                            <h4> <a href="{% url 'task:taskpageid' %}">Task Title</a></h4>
+                            <h4> <a href="/taskpage/{{ task.slug }}">{{task.task_title}}</a></h4>
                             <em>|</em>
-                            <span> Username</span>
+                            <span> {{task.publisher}}</span>
                             </div>
 
-                        <div class="appraise">Time</div>
+                        <div class="appraise">{{task.release_time}}</div>
                         </div>
+                        {% endfor %}
+                        
+                    
+                        
 
-
-                        <div class="singlebox">
-                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
-                            <p class="review">Task description</p>
-
-                        <div class="info">
-                            <h4> <a href="{% url 'task:taskpageid' %}">Task Title</a></h4>
-                            <em>|</em>
-                            <span> Username</span>
-                            </div>
-
-                        <div class="appraise">Time</div>
-                        </div>
-
-
-                        <div class="singlebox">
-                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
-                            <p class="review">Task description</p>
-
-                        <div class="info">
-                            <h4> <a href="{% url 'task:taskpageid' %}">Task Title</a></h4>
-                            <em>|</em>
-                            <span> Username</span>
-                            </div>
-
-                        <div class="appraise">Time</div>
-                        </div>
-
+                        
+                        <div>
+                            
                          <div class="nav4">
-                            <a href="#">Pervious Page</a>
-                            <a href="#">NextPage</a>
-                            <p>PageNumber :</p>
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <input type="pagenum">
+                            {% if Tasks.has_previous %}
+                            <a href="?page=1">&laquo First Page</a>
+                            <a href="?page={{ Tasks.previous_page_number }}">Previous Page</a>
+                            {% endif %}
+                            {% if Tasks.has_next %}
+                            <a href="?page={{ Tasks.next_page_number }}">Next Page</a>
+                            <a href="?page={{ Tasks.paginator.num_pages }}">Last Page &raquo</a>
+                            {% endif %}
+                            {% if Tasks.has_previous %}<a href="?page={{ Tasks.previous_page_number }}">{{ Tasks.previous_page_number }}</a>{% endif %}
+                            <a href="#">{{ Tasks.number }}</a>
+                            {% if Tasks.has_next %}<a href="?page={{ Tasks.next_page_number }}">{{ Tasks.next_page_number }}</a>{% endif %}
+                            <br>{{ Tasks}}<br>
+
+                        
+                        </div>
+                            
+
 
                         </div>
                     </div>
+                    
+                    
+
 
 
 

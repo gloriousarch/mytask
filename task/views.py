@@ -1,20 +1,30 @@
 import sys
 
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseServerError, JsonResponse
 from django.shortcuts import reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from task.forms import UserForm, UserProfileForm, UserModifyForm
+from task.forms import UserForm, UserProfileForm, UserModifyForm, TaskForm
 from task.models import UserProfile, Task
+from django.core.paginator import Paginator
 
+from django.views import View
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse_lazy
+
+
+class CompleteTaskView(View):
+
+    def post(self, request, *args, **kwargs):
+        obj = get_object_or_404(Task, pk=self.kwargs['pk'])
+
+        obj.completion_state = not obj.completion_state
+        obj.save()
+        slug = obj.slug
+        return redirect('/taskpage/'+slug)
 
 def index(request):
-    return render(request, 'task/index.html', )
-
-
-@login_required
-def admin(request):
     return render(request, 'task/index.html', )
 
 
@@ -24,7 +34,14 @@ def about(request):
 
 @login_required
 def taskpage(request):
-    return render(request, 'task/taskpage.html', )
+
+    p = Paginator(Task.objects.order_by('-release_time').filter(completion_state=False, receiver=None), 3)
+    page = request.GET.get('page')
+    tasks = p.get_page(page)
+
+    context_dict = {}
+    context_dict['Tasks'] = tasks
+    return render(request, 'task/taskpage.html', context=context_dict)
 
 
 @login_required
@@ -32,14 +49,58 @@ def taskpageid(request):
     return render(request, 'task/taskpageid.html', )
 
 
+
 @login_required
 def usercenter(request):
-    return render(request, 'task/Usercenter.html', )
+    context_dict = {}
+    try:
+        userprofile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        # Correct the database to make sure user has an associated profile
+        userprofile = UserProfile(user=request.user)
+
+    context_dict['userprofile'] = userprofile
+
+    return render(request, 'task/Usercenter.html', context=context_dict)
 
 
 @login_required
 def posttask(request):
-    return render(request, 'task/posttask.html', )
+    posted = False
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.publisher = UserProfile.objects.get(user=request.user)
+            task.save()
+
+            posted = True
+        else:
+            print(form.errors)
+    else:
+        form = TaskForm()
+
+    return render(request, 'task/posttask.html', context=dict(form=form, posted=posted))
+
+@login_required
+def list(request):
+
+    try:
+        userprofile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        # Correct the database to make sure user has an associated profile
+        userprofile = UserProfile(user=request.user)
+
+    print(userprofile.user)
+    up = userprofile.user
+    p = Paginator(Task.objects.order_by('-release_time').filter(receiver__user=up), 3)
+    page = request.GET.get('page')
+    tasks = p.get_page(page)
+
+    context_dict = {}
+    context_dict['Tasks'] = tasks
+    return render(request, 'task/list.html', context=context_dict)
 
 
 @login_required
@@ -72,7 +133,14 @@ def accepttask(request):
         task.save()
         task_accepted = True
 
-    return render(request, 'task/accepttask.html', context=dict(task_accepted=task_accepted))
+    p = Paginator(Task.objects.order_by('-release_time').filter(completion_state=False, receiver=None), 3)
+    page = request.GET.get('page')
+    tasks = p.get_page(page)
+
+    context_dict = {}
+    context_dict['Tasks'] = tasks
+
+    return render(request, 'task/accepttask.html', context=dict(task_accepted=task_accepted, Tasks=tasks))
 
 
 @login_required
@@ -104,7 +172,8 @@ def modifytheinformation(request):
 
     data = dict(
         profile_form=profile_form,
-        user_form=user_form
+        user_form=user_form,
+        userprofile=UserProfile
     )
     return render(request, 'task/Usercenter.html', context=data)
 
@@ -173,3 +242,43 @@ def test_login(request):
         return HttpResponse('Congrats, you are logged in!')
     else:
         return HttpResponseForbidden('Gotta login bruv')
+
+
+
+
+
+##########################################################--db pages--##########################################################
+
+def show_task(request, task_title_slug):
+    context_dict = {}
+
+    try:
+        task = Task.objects.get(slug=task_title_slug)
+        publisher = task.publisher
+        userprofile = UserProfile.objects.get(user=publisher.user)
+        context_dict['task'] = task
+        context_dict['userprofile'] = userprofile
+
+
+    except Task.DoesNotExist:
+        context_dict['task'] = None
+        context_dict['userprofile'] = None
+        print("no")
+    
+    return render(request, 'task/taskpageid.html', context=context_dict)
+
+
+def search_task(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        tasks = Task.objects.filter(task_title__contains=searched).filter(completion_state=False, receiver=None)
+        return render(request, 'task/search_task.html', {'searched' : searched, 'tasks' : tasks})
+    else:
+        return render(request, 'task/search_task.html', )
+
+
+##########################################################--ajax--##########################################################
+
+
+
+

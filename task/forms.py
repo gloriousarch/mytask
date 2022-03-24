@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from task.models import UserProfile
+from task.models import UserProfile, Task
 
 
 class UserForm(forms.ModelForm):
@@ -22,3 +22,13 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture', 'phone_number')
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('task_title', 'task_description', 'task_reward')
+
+
+
+

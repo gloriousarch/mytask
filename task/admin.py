@@ -6,7 +6,9 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone_number', 'tasks_received', 'tasks_completed', 'tasks_posted')
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_id', 'publisher', 'receiver', 'task_title', 'task_description', 'completion_state', 'task_reward', 'release_time')
+    prepopulated_fields = {'slug':('task_title',)}
+
+    list_display = ('task_id', 'publisher', 'receiver', 'task_title', 'slug', 'task_description', 'completion_state', 'task_reward', 'release_time')
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Task, TaskAdmin)

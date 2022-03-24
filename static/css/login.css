@@ -51,6 +51,22 @@
     width: 100%;
 }
 
+.inputpass {
+    background-color: #fff;
+    border: none;
+    padding: 0.9rem 0.9rem;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+.inputconf {
+    background-color: #fff;
+    border: none;
+    padding: 0.9rem 0.9rem;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
 .form {
     background-color: var(--white);
     display: flex;
