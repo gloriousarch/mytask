@@ -20,6 +20,9 @@
         <div class="sub_banner">
                 <div class="loginBox">
                         <div class="ImgBox"> <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" /> </div>
+                        {% if error %}
+                        <div class="ErrorBox"><p>{{ error }}</p></div>
+                        {% endif %}
                         <form action="{% url 'task:login' %}" method="POST" class="form" >
                                 {% csrf_token %}
 
