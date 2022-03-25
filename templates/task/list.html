@@ -53,7 +53,12 @@
                         <div class="info">
                             <h4> <a href="/taskpage/{{ task.slug }}">{{task.task_title}}</a></h4>
                             <em>|</em>
-                            <span> {{task.publisher}}</span>
+                            <span> {{task.publisher}}</span><br>
+                            {% if task.receiver == None %}
+                                <sp>Task not accepted yet</p>
+                            {% else %}
+                                <sp>Task Receiver: {{task.receiver}}</p>
+                            {% endif %}
                             </div>
 
                         <div class="appraise">{{task.release_time}}</div>

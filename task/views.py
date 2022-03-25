@@ -116,9 +116,8 @@ def list(request):
         # Correct the database to make sure user has an associated profile
         userprofile = UserProfile(user=request.user)
 
-    print(userprofile.user)
     up = userprofile.user
-    p = Paginator(Task.objects.order_by('-release_time').filter(receiver__user=up), 3)
+    p = Paginator(Task.objects.order_by('-release_time').filter(publisher__user=up), 3)
     page = request.GET.get('page')
     tasks = p.get_page(page)
 
@@ -157,7 +156,12 @@ def accepttask(request):
         task.save()
         task_accepted = True
 
-    p = Paginator(Task.objects.order_by('-release_time').filter(completion_state=False, receiver=None), 3)
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        profile = UserProfile.objects.create(user=request.user)
+
+    p = Paginator(Task.objects.order_by('-release_time').filter(receiver=profile), 3)
     page = request.GET.get('page')
     tasks = p.get_page(page)
 

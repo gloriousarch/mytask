@@ -46,7 +46,13 @@
 
                 <div class="saccepttbox">
                         {% for task in Tasks %}
+                        {% if task.completion_state %}
+                                <p>&#10004</p>
+                                {% else %}
+                                <p>&#10008</p>
+                                {% endif %}
                         <div class="singlebox">
+                                
                             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                             <p class="review">{{task.task_description}}</p>
 
