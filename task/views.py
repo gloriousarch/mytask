@@ -237,6 +237,8 @@ def user_register(request):
 
 
 def user_login(request):
+    error = None
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -246,12 +248,12 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('task:index'))
+                return redirect(reverse('task:usercenter'))
         else:
             print(username, password)
-            return HttpResponse('Invalid username/password pair.')
-    else:
-        return render(request, 'task/Login.html')
+            error = "Invalid username/password pair."
+
+    return render(request, 'task/Login.html', context=dict(error=error))
 
 
 @login_required

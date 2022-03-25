@@ -83,3 +83,10 @@
 	margin: 0;
 	margin-bottom: 1.25rem;
 }
+
+.ErrorBox {
+    padding: 1rem;
+    border: red solid;
+    margin: 1rem;
+    background: #ff00001f;
+}
