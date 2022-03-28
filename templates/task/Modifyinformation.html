@@ -20,10 +20,10 @@
         <div class="nav_box">
                  <div class="shell">
                 <a href="#" class="boxa"><span>List</span></a>
-                <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
-                <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
-                <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
-                <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change the password</span></a>
+                <a href="{% url 'task:posttask' %}" class="boxa"><span> Post a Task</span></a>
+                <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accepted Tasks</span></a>
+                <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify your information </span></a>
+                <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change your password</span></a>
                 <a href="{% url 'task:logout' %}" class="boxa"><span>Logout</span></a>
                 </div>
 
@@ -32,18 +32,19 @@
 
                         <div class="trboxleft">
 
-                                <form>
+                                <form id="UserModifyForm" method="post" action="{% url 'task:modifytheinformation' %}">
+                                        {% csrf_token %}
                             <label for="first_name">First name</label>
-                            <input type="text"  name="first_name" placeholder="">
+                            <input type="text"  name="first_name" placeholder="John">
 
                             <label for="last_name"> Family Name</label>
-                            <input type="text"  name="last_name" placeholder="">
+                            <input type="text"  name="last_name" placeholder="Smith">
 
                              <label for="email"> Email</label>
-                            <input type="text"  name="email" placeholder="">
+                            <input type="text"  name="email" placeholder="John_Smith@example.com">
 
                             <label for="phone_number"> Phone number</label>
-                            <input type="text"  name="phone_number" placeholder="">
+                            <input type="text"  name="phone_number" placeholder="+44700900079">
 
                                 <input type="submit" value="Submit">
                                 </form>

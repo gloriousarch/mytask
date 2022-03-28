@@ -19,12 +19,12 @@
         <div class="box clearfix">
         <div class="nav_box">
                  <div class="shell">
-                <a href="#" class="boxa"><span>List</span></a>
-                <a href="{% url 'task:posttask' %}" class="boxa"><span> Post Task</span></a>
-                <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accept Task</span></a>
-                <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify the information </span></a>
-                <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change the password</span></a>
-                <a href="{% url 'task:logout' %}" class="boxa"><span>Logout</span></a>
+                        <a href="#" class="boxa"><span>List</span></a>
+                        <a href="{% url 'task:posttask' %}" class="boxa"><span> Post a Task</span></a>
+                        <a href="{% url 'task:accepttask' %}" class="boxa"><span>Accepted Tasks</span></a>
+                        <a href="{% url 'task:modifytheinformation' %}" class="boxa"><span>Modify your information </span></a>
+                        <a href="{% url 'task:changepassword' %}" class="boxa"><span>Change your password</span></a>
+                        <a href="{% url 'task:logout' %}" class="boxa"><span>Logout</span></a>
                 </div>
 
         </div>
@@ -32,13 +32,13 @@
 
                         <div class="trboxleft">
 
-                                <form>
+                                <form id="TaskForm" method="post" action="{% url 'task:posttask' %}">
                                 {% csrf_token %}
                             <label for="task_title">Task Title</label>
                             <input type="text"  name="task_title" placeholder="">
 
-                            <label for="release_time"> Release time</label>
-                            <input type="text"  name="release_time" placeholder="dd/mm/yy">
+                            <label for="task_reward"> Reward for task</label>
+                            <input type="text"  name="task_reward" placeholder="0.00">
 
                         <label for="state"> State</label>
                         <select  name="state">
@@ -47,18 +47,18 @@
                             </select>
 
                                 <input type="submit" value="Submit">
-                                </form>
+                                
                                 </div>
 
                         <div class="trboxright">
-                                <a href="{% url 'task:list' %}"><button class="b2">List of posted tasks</button></a>
+                                <a href="{% url 'task:list' %}"><button type="button" class="b2" >List of posted tasks</button></a>
                                 <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                                 <a href="#"><button class="b2">Upload task's photo</button></a>
                                 </div>
                 </div>
 
                 <div class="strbox">
-                     <form>
+                     
                             <label for="task_description">Task content:</label>
                             <input type="taskcontent"  name="task_description" placeholder="">
                          </form>
