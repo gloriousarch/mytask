@@ -17,7 +17,21 @@
             *zoom: 1;
         }
 
-
+.inputpass {
+        background-color: #fff;
+        border: none;
+        padding: 0.9rem 0.9rem;
+        margin: 0.5rem 0;
+        width: 95%;
+    }
+        
+.inputconf {
+            background-color: #fff;
+            border: none;
+            padding: 0.9rem 0.9rem;
+            margin: 0.5rem 0;
+            width: 95%;
+        }
 
 
 

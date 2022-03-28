@@ -1,3 +1,4 @@
+
 window.onload = function(){ 
     document.querySelector('.btn').onclick = function(){
                                         
@@ -12,4 +13,4 @@ window.onload = function(){
                 return false
         }
     }
-}; 
+};

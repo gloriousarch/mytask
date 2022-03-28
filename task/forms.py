@@ -30,3 +30,10 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('task_title', 'task_description', 'task_reward')
+
+class changepassword(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('password',)

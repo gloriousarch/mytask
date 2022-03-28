@@ -104,7 +104,7 @@ def posttask(request):
     posted = False
 
     if request.method == 'POST':
-        print("form!")
+
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
@@ -121,6 +121,11 @@ def posttask(request):
         form = TaskForm()
 
     return render(request, 'task/posttask.html', context=dict(form=form, posted=posted))
+
+
+
+
+
 
 @login_required
 def list(request):
@@ -224,6 +229,7 @@ def modifytheinformation(request):
 def changepassword(request):
     if request.method == 'POST':
         password = request.POST.get('password')
+        print(password)
 
         try:
             request.user.set_password(password)
