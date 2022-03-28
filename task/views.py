@@ -93,6 +93,7 @@ def posttask(request):
     posted = False
 
     if request.method == 'POST':
+        print("form!")
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)

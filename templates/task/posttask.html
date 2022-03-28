@@ -33,6 +33,7 @@
                         <div class="trboxleft">
 
                                 <form>
+                                {% csrf_token %}
                             <label for="task_title">Task Title</label>
                             <input type="text"  name="task_title" placeholder="">
 
@@ -64,6 +65,9 @@
                 </div>
 
         </div>
+
+
+        
 
 
 

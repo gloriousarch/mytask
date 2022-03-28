@@ -34,10 +34,11 @@
                 <div class="trbox">
 
                         <div class="tasktrboxleft">
-                            <p>Task id: {{ task.task_id }}<p>
-                            <p>Task issuer: {{ task.publisher }}<p>
-                            <p>Phone number: {{ userprofile.phone_number }}<p>
-                            <p>Release time: {{ task.release_time }}<p>
+                            <p>Task id: {{ task.task_id }}</p>
+                            <p>Task issuer: {{ task.publisher }}</p>
+                            <p>Phone number: {{ userprofile.phone_number }}</p>
+                            <p>Release time: {{ task.release_time }}</p>
+                            <p>Reward: £{{ task.task_reward }}</p>
                                     {% if task.completion_state %}
                                     <p>Completion status: Complete</p>
                                     {% else %}

@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 {% extends 'task/usercenterbase.html' %}
 {% load staticfiles %} <!-- New line -->
 
@@ -18,11 +19,13 @@
 {% endblock %}
 
 {% block banner_block %}
+
         <div class="box clearfix">
         <div class="nav_box">
+                
 
         </div>
-                <div class="accepttbox">
+                <div  class="accepttbox">
 
                         <div class="taskpageboxleft">
                                 <form method=POST action="{% url 'task:search_task' %}">
@@ -34,8 +37,8 @@
                 </div>
 
                 
-                
-                <div class="saccepttbox">
+                <center><button class="b2">Refresh</button></center>
+                <div id="select" class="saccepttbox">
                         {% for task in Tasks %}
                         <div class="singlebox">
                             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
@@ -48,11 +51,12 @@
                             </div>
 
                         <div class="appraise">{{task.release_time}}</div>
+                        
                         </div>
                         {% endfor %}
                         
                     
-                        
+
 
                         
                         <div>
@@ -73,24 +77,39 @@
 
                         
                         </div>
+
+                        
                             
 
 
                         </div>
-                    </div>
-                    
+                </div>
+                
+
+                
+
+
+                
                     
 
 
 
 
         </div>
+       
 
-
-
+        
 {% endblock %}
 
 {% block nav2_block %}
         <a href="{% url 'task:usercenter' %}">User Center </a>
         <a href="{% url 'task:about' %}">About</a>
+        <script>
+                $(document).ready(function() {
+                        $('.b2').click(function() {
+                                $("#select").load(location.href + " #select")
+                                
+                        });
+                });
+        </script>
 {% endblock %}

@@ -46,11 +46,7 @@
 
                 <div class="saccepttbox">
                         {% for task in Tasks %}
-                        {% if task.completion_state %}
-                                <p>&#10004</p>
-                                {% else %}
-                                <p>&#10008</p>
-                                {% endif %}
+                        
                         <div class="singlebox">
                                 
                             <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
@@ -63,7 +59,13 @@
                             </div>
 
                         <div class="appraise">{{task.release_time}}</div>
+                        {% if task.completion_state %}
+                                <p>&#10004</p>
+                                {% else %}
+                                <p>&#10008</p>
+                                {% endif %}
                         </div>
+                        
                         {% endfor %}
                         
                         
@@ -85,7 +87,7 @@
                             {% if Tasks.has_previous %}<a href="?page={{ Tasks.previous_page_number }}">{{ Tasks.previous_page_number }}</a>{% endif %}
                             <a href="#">{{ Tasks.number }}</a>
                             {% if Tasks.has_next %}<a href="?page={{ Tasks.next_page_number }}">{{ Tasks.next_page_number }}</a>{% endif %}
-                            <br>{{ Tasks}}<br>
+                            <br>{{ Tasks }}<br>
 
                         
                         </div>

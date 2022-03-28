@@ -62,6 +62,11 @@
                             </div>
 
                         <div class="appraise">{{task.release_time}}</div>
+                        {% if task.completion_state %}
+                                <p>&#10004</p>
+                                {% else %}
+                                <p>&#10008</p>
+                                {% endif %}
                         </div>
                         {% endfor %}
                         
