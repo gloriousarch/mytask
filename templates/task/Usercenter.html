@@ -33,12 +33,17 @@
                 <div class="test_box">
                         <p>Welcome {{user}} !</p>
                         <p>Tasks Posted: {{userprofile.tasks_posted}}</p>
-                        <p>Accept task : {{userprofile.tasks_received}}</p>
+                        <p>Accepted tasks : {{userprofile.tasks_received}}</p>
                         <p>Completed tasks : {{userprofile.tasks_completed}}</p>
                         </div>
 
                 <div class="user_photo_box">
+                        {% if userprofile.picture %}
+                        <img src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="210" />
+                        {% else %}
                         <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                        {% endif %}
+                        
                          <a href="#"><button class="b2">Upload User's Photo </button></a>
                         </div>
 

@@ -1,6 +1,8 @@
 from django.urls import path
 from task import views
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 app_name = 'task'
@@ -35,4 +37,4 @@ urlpatterns = [
 
     #ajax
  
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

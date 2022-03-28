@@ -49,8 +49,12 @@
                         
                         <div class="singlebox">
                                 
-                            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
-                            <p class="review">{{task.task_description}}</p>
+                        {% if task.publisher.picture %}
+                                <centre><img src="{{task.publisher.picture.url}}" alt="Profile pic" height="110"/></centre>
+                        {% else %}
+                                <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                        {% endif %}
+                        <p class="review">{{task.task_description}}</p>
 
                         <div class="info">
                             <h4> <a href="/taskpage/{{ task.slug }}">{{task.task_title}}</a></h4>

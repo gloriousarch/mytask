@@ -51,7 +51,11 @@
                                 </div>
 
                         <div class="trboxright">
+                        {% if request.user.userprofile.picture %}
+                                <img src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="300" />
+                        {% else %}
                                 <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                        {% endif %}
                                 <a href="#"><button class="b2">Upload user's photo</button></a>
                                 </div>
                 </div>

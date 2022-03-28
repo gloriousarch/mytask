@@ -20,7 +20,15 @@ class CompleteTaskView(View):
         obj = get_object_or_404(Task, pk=self.kwargs['pk'])
 
         obj.completion_state = not obj.completion_state
+        profile = UserProfile.objects.get(user=request.user)
+        if obj.completion_state:
+            profile.tasks_completed = profile.tasks_completed + 1
+        else:
+            profile.tasks_completed = profile.tasks_completed - 1
         obj.save()
+        profile.save()
+        
+        
         slug = obj.slug
         return redirect('/taskpage/'+slug)
 
@@ -38,9 +46,12 @@ class AcceptTaskView(View):
 
         if obj.receiver == None:
             obj.receiver = userprofile
+            userprofile.tasks_received = userprofile.tasks_received + 1
         else:
             obj.receiver = None
+            userprofile.tasks_received = userprofile.tasks_received - 1
         obj.save()
+        userprofile.save()
         slug = obj.slug
         return redirect('/taskpage/'+slug)
 
@@ -99,6 +110,9 @@ def posttask(request):
             task = form.save(commit=False)
             task.publisher = UserProfile.objects.get(user=request.user)
             task.save()
+            userprofile = UserProfile.objects.get(user=request.user)
+            userprofile.tasks_posted = userprofile.tasks_posted + 1
+            userprofile.save()
 
             posted = True
         else:

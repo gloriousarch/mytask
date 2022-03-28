@@ -28,7 +28,11 @@
         {%if task %}
             <div class="titleandpbox">
             <p>Task Title: {{ task.task_title }}<p>  
-            <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+        {% if task.publisher.picture %}
+                <centre><img src="{{task.publisher.picture.url}}" alt="Profile pic" height="300"/></centre>
+        {% else %}
+                <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+        {% endif %}
                 </div>
         </div>
                 <div class="trbox">
@@ -84,7 +88,7 @@
                 </div>
 
                 <div class="strbox">
-                    <div class="testcbox"> This is a task platform in school ,designed to help each other!  </div>
+                    <div class="testcbox"> {{task.task_description}}  </div>
                 </div>
 
         </div>

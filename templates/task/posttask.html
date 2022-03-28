@@ -52,7 +52,11 @@
 
                         <div class="trboxright">
                                 <a href="{% url 'task:list' %}"><button type="button" class="b2" >List of posted tasks</button></a>
-                                <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                                {% if request.user.userprofile.picture %}
+                                        <img src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="150" />
+                                {% else %}
+                                        <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                                {% endif %}
                                 <a href="#"><button class="b2">Upload task's photo</button></a>
                                 </div>
                 </div>
