@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block link_block %}
-<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+    <link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'JS/pic_upload.js' %}"></script>
 {% endblock %}
 
 {% block nav_block %}
@@ -31,20 +33,20 @@
                 <div class="trbox">
 
                         <div class="trboxleft">
-
-                                <form id="UserModifyForm" method="post" action="{% url 'task:modifytheinformation' %}">
+                                <form id="UserModifyForm" method="post" action="{% url 'task:modifytheinformation' %}"
+                                      enctype="multipart/form-data">
                                         {% csrf_token %}
-                            <label for="first_name">First name</label>
-                            <input type="text"  name="first_name" placeholder="John">
+                                        <label for="first_name">First name</label>
+                                        <input type="text"  name="first_name" placeholder="John">
 
-                            <label for="last_name"> Family Name</label>
-                            <input type="text"  name="last_name" placeholder="Smith">
+                                        <label for="last_name"> Family Name</label>
+                                        <input type="text"  name="last_name" placeholder="Smith">
 
-                             <label for="email"> Email</label>
-                            <input type="text"  name="email" placeholder="John_Smith@example.com">
+                                         <label for="email"> Email</label>
+                                        <input type="text"  name="email" placeholder="John_Smith@example.com">
 
-                            <label for="phone_number"> Phone number</label>
-                            <input type="text"  name="phone_number" placeholder="+44700900079">
+                                        <label for="phone_number"> Phone number</label>
+                                        <input type="text"  name="phone_number" placeholder="+44700900079">
 
                                 <input type="submit" value="Submit">
                                 </form>
@@ -52,12 +54,16 @@
 
                         <div class="trboxright">
                         {% if request.user.userprofile.picture %}
-                                <img src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="300" />
+                                <img id="profileImage" src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="300" />
                         {% else %}
-                                <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                                <img id="profileImage" src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
                         {% endif %}
-                                <a href="#"><button class="b2">Upload user's photo</button></a>
-                                </div>
+                                <form id="imageForm" method="post" enctype=multipart/form-data>
+                                    {% csrf_token %}
+                                    <input id='uploadPicture' type='file' name="picture" accept="image/jpeg, image/png" hidden/>
+                                    <input id='uploadButton' class="b2" type='button' value='Upload Profile Picture' />
+                                </form>
+                        </div>
                 </div>
 
 

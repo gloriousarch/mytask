@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block link_block %}
-<link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+    <link rel="stylesheet" href="{% static "css/usercenter.css" %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'JS/pic_upload.js' %}"></script>
 {% endblock %}
 
 {% block nav_block %}
@@ -38,38 +40,41 @@
                         </div>
 
                 <div class="user_photo_box">
-                        {% if userprofile.picture %}
-                        <img src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="210" />
-                        {% else %}
-                        <img src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
-                        {% endif %}
-                        
-                         <a href="#"><button class="b2">Upload User's Photo </button></a>
-                        </div>
+                {% if request.user.userprofile.picture %}
+                        <img id="profileImage" src="{{request.user.userprofile.picture.url}}" alt="Profile pic" height="210" />
+                {% else %}
+                        <img id="profileImage" src="{% static 'images/Welcome.png' %}" alt="Picture of Welcome" />
+                {% endif %}
+                        <form action="{% url 'task:modifytheinformation' %}" id="imageForm" method="post" enctype=multipart/form-data>
+                            {% csrf_token %}
+                            <input id='uploadPicture' type='file' name="picture" accept="image/jpeg, image/png" hidden/>
+                            <input id='uploadButton' class="b2" type='button' value='Upload Profile Picture' />
+                        </form>
+                </div>
 
-                        {% if user_form or profile_form %}
-                        <div class="user_modify_box">
-                            <form id="user_modify_form" method="post" action="{% url 'task:modifytheinformation' %}">
-                                {% csrf_token %}
+                {% if user_form or profile_form %}
+                <div class="user_modify_box">
+                    <form id="user_modify_form" method="post" action="{% url 'task:modifytheinformation' %}">
+                        {% csrf_token %}
 
-                                {% for field in user_form.visible_fields %}
-                                    {{ field.errors }}
-                                    {{ field.help_text }}
-                                    {{ field }}
-                                    <br/>
-                                {% endfor %}
+                        {% for field in user_form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                            <br/>
+                        {% endfor %}
 
-                                {% for field in profile_form.visible_fields %}
-                                    {{ field.errors }}
-                                    {{ field.help_text }}
-                                    {{ field }}
-                                    <br/>
-                                {% endfor %}
+                        {% for field in profile_form.visible_fields %}
+                            {{ field.errors }}
+                            {{ field.help_text }}
+                            {{ field }}
+                            <br/>
+                        {% endfor %}
 
-                                <input type="submit" name="submit" value="Update Information" />
-                            </form>
-                        </div>
-                        {% endif %}
+                        <input type="submit" name="submit" value="Update Information" />
+                    </form>
+                </div>
+                {% endif %}
         </div>
 
             <div class="r_box"></div>

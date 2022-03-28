@@ -209,7 +209,7 @@ def modifytheinformation(request):
 
             # Get profile fields
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['pictures']
+                profile.picture = request.FILES['picture']
 
             profile.save()
         else:
@@ -219,6 +219,7 @@ def modifytheinformation(request):
         profile_form = UserProfileForm(instance=profile)
 
     data = dict(
+        profile=profile,
         profile_form=profile_form,
         user_form=user_form
     )
