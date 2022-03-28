@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block link_block %}
-<link rel="stylesheet" href="{% static "css/login.css" %}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static "css/login.css" %}" />
+        <script src ="{% static "js/password-matcher.js" %}" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block nav_block %}
@@ -32,21 +34,7 @@
                                 <input type="email" name="email" placeholder="Email" class="input" />
                                 <input type="submit" value="Register" class="btn" >
                         </form>
-                        <script type="text/javascript">
-                                document.querySelector('.btn').onclick = function(){
-                                        
-                                        var password = document.querySelector('.inputpass').value,
-                                        confirmPassword = document.querySelector('.inputconf').value;
-                
-                                        if(password == ""){
-                                                alert("Field cannot be empty.");
-                                        }
-                                        else if(password != confirmPassword){
-                                                alert("passwords do not match.");
-                                                return false
-                                        }
-                                } 
-                        </script>
+                        
                 </div>
         </div>
 

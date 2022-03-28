@@ -20,16 +20,16 @@ def populate():
 
     #list of potential task titles to generate
     tasklist = [
-        ["gardening" , 50, "doing some gardening"],
-        ["homework", 20, "compute these problems"], 
-        ["maths", 10, "solve these sums"], 
-        ["tutoring", 5, "help these students"], 
-        ["cleaning", 35, "clean the tables"],
+        ["gardening" , 50, "I need help doing some gardening, my garden is full of weeds!"],
+        ["homework", 20, "Please can you compute these problems for me! I am struggling so much with these equations."], 
+        ["maths", 10, "I need you to solve these sums for me so that I can pass maths."], 
+        ["tutoring", 5, "I need someone to help these students, they are all failing their classes, they need help!"], 
+        ["cleaning", 35, "The student's tables are very dirty, please can someone clean the tables?"],
         ["sports", 26, "time to do sport!"],
-        ["art", 12, "i need help with my painting"],
-        ["lost shoes", 15, "can someone help me find my lost shoes?"],
-        ["washing", 4, "please wash my clothes for me"],
-        ["group project", 7, "i need another person for my group project"]
+        ["art", 12, "I need help with my painting, can anyone give me inspiration to finish it off?"],
+        ["lost shoes", 15, "Could someone help me find my lost shoes? I must have left them somewhere."],
+        ["washing", 4, "Please wash my clothes for me, my washing machine is broken!"],
+        ["group project", 7, "I need another person for my group project, otherwise we will fail!"]
         ]
 
 
